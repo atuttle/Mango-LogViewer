@@ -17,9 +17,7 @@ specific language governing permissions and limitations under the License.
 
 VERSION INFORMATION:
 
-This file is part of LogViewer Beta 1 (0.3).
-
-The version number in parenthesis is in the format versionNumber.subversionRevisionNumber.
+This file is part of LogViewer 1.0.
 --->
 <cfcomponent displayname="Handler" extends="BasePlugin">
 
