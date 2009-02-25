@@ -18,17 +18,22 @@ specific language governing permissions and limitations under the License.
 
 VERSION INFORMATION:
 
-This file is part of LogViewer Beta 1 (0.3).
+This file is part of LogViewer version 1.0.
 -->
-<plugin id="com.tuttle.plugins.logViewer" name="LogViewer" version="0.3" provider-name="Adam Tuttle | http://fusiongrokker.com" class="LogViewer.Handler">
-	<description><![CDATA[ Adds Error/Warning log alerts to your Mango sidebar.<br/>
+<plugin id="com.tuttle.plugins.logViewer" name="LogViewer" version="1.0" provider-name="Adam Tuttle | http://fusiongrokker.com" class="LogViewer.Handler">
+	<description><![CDATA[ Adds Error/Warning log alerts to your Blog Administrator sidebar.<br/>
 	<br/>
-	Written By <a href="http://fusiongrokker.com">Adam Tuttle</a><br/>
+	Written by <a href="http://fusiongrokker.com">Adam Tuttle</a><br/>
+	Contributions by <a href="http://www.sebduggan.com">Seb Duggan</a><br/>
 	Find the latest version at: <a href="http://fusiongrokker.com/page/projects">FusionGrokker</a> ]]></description>
-	<requiresVersion match="greaterOrEqual">1.1</requiresVersion>
+	<requiresVersion match="greaterOrEqual">1.3</requiresVersion>
 	<listens/>
 	<listensAdmin>
 		<event name="mainNav" type="synch" priority="5" />
 	  	<event name="logViewer-dash" type="synch" priority="5" />
 	</listensAdmin>
+	<assetsAdmin>
+		<asset file="icons/bug.png" />
+		<asset file="icons/bug_error.png" />
+	</assetsAdmin>
 </plugin>

@@ -18,44 +18,26 @@ specific language governing permissions and limitations under the License.
 VERSION INFORMATION:
 
 This file is part of LogViewer Beta 1 (0.3).
+
+The version number in parenthesis is in the format versionNumber.subversionRevisionNumber.
 --->
-<cfcomponent displayname="Handler">
-	<cfset variables.name = "LogViewer" />
-	<cfset variables.id = "com.tuttle.plugins.LogViewer" />
-	<cfset variables.package = "com/tuttle/plugins/LogViewer"/>
+<cfcomponent displayname="Handler" extends="BasePlugin">
 
 	<cffunction name="init" access="public" output="false" returntype="any">
 		<cfargument name="mainManager" type="any" required="true" />
 		<cfargument name="preferences" type="any" required="true" />
-
-		<cfset variables.mainManager = arguments.mainManager />
-		<cfset variables.preferences = arguments.preferences />
 		
-		<cfset variables.pluginPath = arguments.mainManager.getBlog().getId() & "/" & variables.package />
+		<cfset setManager(arguments.mainManager) />
+		<cfset setPreferencesManager(arguments.preferences) />
+		<cfset setPackage("com/fusiongrokker/plugins/LogViewer") />
 		
-		<cfset variables.basePath = arguments.mainManager.getBlog().getBasePath() />
+		<cfset variables.basePath = getManager().getBlog().getBasePath() />
 		<cfset variables.warningPath = variables.basePath & "components/utilities/logs/warning.log.html"/>
 		<cfset variables.errorPath = variables.basePath & "components/utilities/logs/error.log.html"/>
 		
 		<cfreturn this/>
 	</cffunction>
-	<cffunction name="getName" access="public" output="false" returntype="string">
-		<cfreturn variables.name />
-	</cffunction>
-	<cffunction name="setName" access="public" output="false" returntype="void">
-		<cfargument name="name" type="string" required="true" />
-		<cfset variables.name = arguments.name />
-		<cfreturn />
-	</cffunction>
-	<cffunction name="getId" access="public" output="false" returntype="any">
-		<cfreturn variables.id />
-	</cffunction>
-	<cffunction name="setId" access="public" output="false" returntype="void">
-		<cfargument name="id" type="any" required="true" />
-		<cfset variables.id = arguments.id />
-		<cfreturn />
-	</cffunction>
-
+	
 <!--- :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: --->	
 	<cffunction name="setup" hint="This is run when a plugin is activated" access="public" output="false" returntype="any">
 		<cfreturn "Plugin activated" />
@@ -86,43 +68,46 @@ This file is part of LogViewer Beta 1 (0.3).
 			<cfset link.page = "generic" />
 			<cfset link.title = "Log Viewer" />
 			<cfset link.eventName = "logViewer-dash" />
+			<cfset link.icon = "#getAdminAssetPath()#bug.png" />
 			
 			<cfif logsExist()>
 				<cfset link.title = "<strong>Log Viewer</strong>"/>
+				<cfset link.icon = "#getAdminAssetPath()#bug_error.png" />
 			</cfif>
 			
 			<cfset arguments.event.addLink(link)>
 
 		<cfelseif arguments.event.getName() EQ "logViewer-dash">
 			<cfset data = arguments.event.getData() />
-			
+						
 			<cfif structKeyExists(arguments.event.data.externalData,"clear")>
 				<cfset clearLogs()/>
 			</cfif>
 
 			<cfsavecontent variable="page">
-				<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.0/jquery.min.js"></script>
 				<style>
 					table.cfdump_struct th.struct {background:#44C !important;}
 					table.cfdump_array th.array {background:#090 !important;}
 				</style>
 				<ul>
 					<cfif warningsExist()>
-						<li><a href="javascript:void(0);" id="lv_err">Warning Log</a></li>
+						<li><a href="#" id="lv_err">Warning Log</a></li>
 						<script type="text/javascript">
 							jQuery(document).ready(function($){
 								$("#lv_err").click(function(){
 									$("#log").load('<cfoutput>#variables.warningPath#?refresh=#dateFormat(now(),'YYYYMMDD')##timeFormat(now(),'HHMMSS')#</cfoutput>');
+									return false;
 								});
 							});
 						</script>
 					</cfif>
 					<cfif errorsExist()>
-						<li><a href="javascript:void(0);" id="lv_warn">Error Log</a></li>
+						<li><a href="#" id="lv_warn">Error Log</a></li>
 						<script type="text/javascript">
 							jQuery(document).ready(function($){
 								$("#lv_warn").click(function(){
 									$("#log").load('<cfoutput>#variables.errorPath#?refresh=#dateFormat(now(),'YYYYMMDD')##timeFormat(now(),'HHMMSS')#</cfoutput>');
+									return false;
 								});
 							});
 						</script>
@@ -134,7 +119,7 @@ This file is part of LogViewer Beta 1 (0.3).
 					</cfif>
 				</ul>
 				<br/>
-				<div id="log" style="background:##eee;"></div>
+				<div id="log" style="background:#eee;"></div>
 			</cfsavecontent>
 
 			<!--- change message --->
@@ -152,7 +137,6 @@ This file is part of LogViewer Beta 1 (0.3).
 		<cfreturn fileExists(expandPath(variables.warningPath))/>
 	</cffunction>
 	<cffunction name="errorsExist" access="private" output="false" returnType="boolean">
-		<cfset var logPath = variables.basePath & "components/utilities/logs/error.log.html"/>
 		<cfreturn fileExists(expandPath(variables.errorPath))/>
 	</cffunction>
 	<cffunction name="clearLogs" access="private" output="false" returnType="void">
