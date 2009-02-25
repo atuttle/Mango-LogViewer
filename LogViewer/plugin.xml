@@ -20,7 +20,7 @@ VERSION INFORMATION:
 
 This file is part of LogViewer 1.0.
 -->
-<plugin id="com.tuttle.plugins.logViewer" name="LogViewer" version="1.0" provider-name="Adam Tuttle | http://fusiongrokker.com" class="LogViewer.Handler">
+<plugin id="com.fusiongrokker.plugins.LogViewer" name="LogViewer" version="1.0" provider-name="Adam Tuttle | http://fusiongrokker.com" class="LogViewer.Handler">
 	<description><![CDATA[ Adds Error/Warning log alerts to your Blog Administrator sidebar.<br/>
 	<br/>
 	Written by <a href="http://fusiongrokker.com">Adam Tuttle</a><br/>
