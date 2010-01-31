@@ -18,15 +18,15 @@ specific language governing permissions and limitations under the License.
 
 VERSION INFORMATION:
 
-This file is part of LogViewer 1.0.
+This file is part of LogViewer.
 -->
-<plugin id="com.fusiongrokker.plugins.LogViewer" name="LogViewer" version="1.0" provider-name="Adam Tuttle | http://fusiongrokker.com" class="LogViewer.Handler">
-	<description><![CDATA[ Adds Error/Warning log alerts to your Blog Administrator sidebar.<br/>
+<plugin id="com.fusiongrokker.plugins.LogViewer" name="LogViewer" version="1.1" provider-name="Adam Tuttle | http://fusiongrokker.com" class="LogViewer.Handler">
+	<description><![CDATA[ Adds Error/Warning log alerts to your Blog Administrator sidebar. Requires Mango 1.4.2 or later.<br/>
 	<br/>
 	Written by <a href="http://fusiongrokker.com">Adam Tuttle</a><br/>
-	Contributions by <a href="http://www.sebduggan.com">Seb Duggan</a><br/>
+	With contributions by <a href="http://www.sebduggan.com">Seb Duggan</a><br/>
 	Find the latest version at: <a href="http://fusiongrokker.com/page/projects">FusionGrokker</a> ]]></description>
-	<requiresVersion match="greaterOrEqual">1.3</requiresVersion>
+	<requiresVersion match="greaterOrEqual">1.4.2</requiresVersion>
 	<listens/>
 	<listensAdmin>
 		<event name="mainNav" type="synch" priority="5" />
