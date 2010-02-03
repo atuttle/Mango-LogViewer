@@ -26,7 +26,7 @@ This file is part of LogViewer.
 	Written by <a href="http://fusiongrokker.com">Adam Tuttle</a><br/>
 	With contributions by <a href="http://www.sebduggan.com">Seb Duggan</a><br/>
 	Find the latest version at: <a href="http://fusiongrokker.com/page/projects">FusionGrokker</a> ]]></description>
-	<requiresVersion match="greaterOrEqual">1.4.2</requiresVersion>
+	<requiresVersion match="greaterOrEqual">1.4.3</requiresVersion>
 	<listens/>
 	<listensAdmin>
 		<event name="mainNav" type="synch" priority="5" />
