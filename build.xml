@@ -1,10 +1,11 @@
-<project name="Mango-LogViewer" default="publish-to-test" basedir=".">
+<project name="LogViewer" default="publish-to-test" basedir=".">
 
 	<property name="dir.dev" value="${basedir}" />
-	<property name="dir.test" value="/Users/adam/www/MangoDev/components/plugins/user/LogViewer/" />
+	<property name="dir.test" value="/Users/adam/Sites/localhost/MangoDev/components/plugins/user/LogViewer/" />
 	
 	<!-- :::::::::::::::::::::::::::::::::::::::::::::::::::::::: -->
 	<!-- :::::::::::::::::::::::::::::::::::::::::::::::::::::::: -->
+
 	<target name="publish-to-test">
 		<copy todir="${dir.test}" verbose="true">
 			<fileset dir="${dir.dev}/LogViewer">
@@ -17,9 +18,9 @@
 	</target>
 	
 	<target name="make-zip">
-		<delete file="${dir.dev}/build.zip" />
+		<delete file="${dir.dev}/latest.zip" />
 		<zip 
-			destfile="${dir.dev}/build.zip"
+			destfile="${dir.dev}/latest.zip"
 			basedir="${dir.dev}"
 			excludes="**/.DS_Store,build.xml,.git/**,.settings/**,.project"
 		/>
