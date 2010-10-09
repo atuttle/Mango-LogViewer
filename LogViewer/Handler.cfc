@@ -82,6 +82,10 @@ This file is part of LogViewer.
 				<cfset clearLogs()/>
 			</cfif>
 
+			<cfif structKeyExists(arguments.event.data.externalData, "enableVerbose")>
+				<cfset enableVerbose() />
+			</cfif>
+
 			<cfsavecontent variable="page">
 				<style>
 					table.cfdump_wddx, table.cfdump_xml, table.cfdump_struct, table.cfdump_varundefined, table.cfdump_array, table.cfdump_query, table.cfdump_cfc, table.cfdump_object, table.cfdump_binary, table.cfdump_udf, table.cfdump_udfbody, table.cfdump_udfarguments {
@@ -133,6 +137,7 @@ This file is part of LogViewer.
 				<cfif logsExist()>
 					<ul>
 						<li><a href="generic.cfm?event=logViewer-dash&owner=LogViewer&selected=logViewer-dash&clear=true" style="color:red;">Clear logs</a></li>
+						<li><a href="generic.cfm?event=logViewer-dash&selected=logViewer-dash&enableVerbose=true">Enable verbose logging</a> (not an indicator that verbose logging is off)</li>
 					</ul>
 					<br/>
 					<cfset local.logs = getManager().getLogsManager().search() />
@@ -179,6 +184,17 @@ This file is part of LogViewer.
 	<cffunction name="clearLogs" access="private" output="false" returnType="void">
 		<!--- delete everything --->
 		<cfset getManager().getLogsManager().deleteByCriteria() />
+	</cffunction>
+
+	<cffunction name="enableVerbose" access="private" output="false" returnType="void">
+		<cfset var settingsFile = expandPath(variables.basePath & "config.cfm") />
+		<cfset var fileContent = '' />
+		<!--- update the config file --->
+		<cffile action="read" file="#settingsFile#" variable="fileContent" />
+		<cfset fileContent = rereplaceNoCase (fileContent , '<node name="logging"><map><entry key="level" value="[^"]+"/></map></node>', '<node name="logging"><map><entry key="level" value="debug"/></map></node>', "all") />
+		<cffile action="write" file="#settingsFile#" output="#fileContent#" />
+		<!--- now reload the cache --->
+		<cfset getManager().reloadConfig() />
 	</cffunction>
 
 </cfcomponent>

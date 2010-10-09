@@ -20,7 +20,7 @@ VERSION INFORMATION:
 
 This file is part of LogViewer.
 -->
-<plugin id="com.fusiongrokker.plugins.LogViewer" name="LogViewer" version="1.1" provider-name="Adam Tuttle | http://fusiongrokker.com" class="LogViewer.Handler">
+<plugin id="com.fusiongrokker.plugins.LogViewer" name="LogViewer" version="1.2" provider-name="Adam Tuttle | http://fusiongrokker.com" class="LogViewer.Handler">
 	<description><![CDATA[ Adds Error/Warning log alerts to your Blog Administrator sidebar. Requires Mango 1.4.3 or later.<br/>
 	<br/>
 	Written by <a href="http://fusiongrokker.com">Adam Tuttle</a>, with contributions by <a href="http://www.sebduggan.com">Seb Duggan</a><br/>
